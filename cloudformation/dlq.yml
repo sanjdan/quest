@@ -1,0 +1,17 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: 'CloudFormation template to set up DLQs for handling failed ECS task invocations.'
+
+Resources:
+  DLQ:
+    Type: 'AWS::SQS::Queue'
+    Properties:
+      QueueName: 'ECSFailedTaskDLQ'
+
+Outputs:
+  DLQArn:
+    Description: 'ARN of the DLQ'
+    Value: !GetAtt DLQ.Arn
+
+  DLQName:
+    Description: 'Name of the DLQ'
+    Value: !Ref DLQ
