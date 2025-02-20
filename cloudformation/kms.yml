@@ -1,0 +1,21 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: 'CloudFormation template to set up AWS KMS for encrypting sensitive environment variables in ECS tasks.'
+
+Resources:
+  KMSKey:
+    Type: 'AWS::KMS::Key'
+    Properties:
+      Description: 'KMS key for encrypting sensitive environment variables in ECS tasks.'
+      KeyPolicy:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: 'Allow'
+            Principal:
+              AWS: !Sub 'arn:aws:iam::${AWS::AccountId}:root'
+            Action: 'kms:*'
+            Resource: '*'
+
+Outputs:
+  KMSKeyArn:
+    Description: 'ARN of the KMS Key'
+    Value: !GetAtt KMSKey.Arn

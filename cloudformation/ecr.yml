@@ -1,0 +1,22 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: 'CloudFormation template to create ECR repositories for frontend and backend applications.'
+
+Resources:
+  FrontendRepository:
+    Type: 'AWS::ECR::Repository'
+    Properties:
+      RepositoryName: 'frontend-app-repo'
+
+  BackendRepository:
+    Type: 'AWS::ECR::Repository'
+    Properties:
+      RepositoryName: 'backend-app-repo'
+
+Outputs:
+  FrontendRepositoryUri:
+    Description: 'URI of the frontend ECR repository'
+    Value: !GetAtt FrontendRepository.RepositoryUri
+
+  BackendRepositoryUri:
+    Description: 'URI of the backend ECR repository'
+    Value: !GetAtt BackendRepository.RepositoryUri
